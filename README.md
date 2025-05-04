@@ -39,7 +39,7 @@ git clone https://github.com/srihari-swain/Al-ML-projects.git
 ### 2. Go to the Main Directory
 
 ```bash
-cd web-content-qa
+cd Q-A-Tool
 ```
 
 ### 3. Install the Required Dependencies
