@@ -10,7 +10,7 @@ from vectorstore import IngestUrls
 from retriver import Retriever
 
 st.set_page_config(page_title="Web Content Q&A Tool", page_icon="🔍")
-api_key = st.secrets["GROQ_API_KEY"]
+
 
 def add_dynamic_network_bg(logo_path=None):
     background_svg = '''
@@ -474,7 +474,7 @@ if st.button("Ingest URLs", disabled=not urls):
             st.session_state.sources = sources
             st.session_state.urls_ingested = True
             st.success("Ingestion complete!")
-            st.session_state.retriever = Retriever(st.session_state.vector_store, st.session_state.sources, api_key)
+            st.session_state.retriever = Retriever(st.session_state.vector_store, st.session_state.sources)
         except Exception as e:
             st.error(f"Error during ingestion: {e}")
 
