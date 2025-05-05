@@ -18,7 +18,7 @@ Check out the demo video to see the tool in action:
 
 | Component | Technology Used |
 |-----------|----------------|
-| Web Scraping | BeautifulSoup4 + Playwright |
+| Web Scraping | BeautifulSoup4 + requests |
 | Embedding Model | all-MiniLM-L6-v2 (via HuggingFace) |
 | Vector Database | FAISS |
 | RAG Framework | LangChain + LangChain Community |
@@ -53,12 +53,6 @@ cd Q-A-Tool
 
 ```bash
 pip install -r requirements.txt
-```
-
-### 4. Initialize Playwright
-
-```bash
-playwright install
 ```
 
 ### 5. Configure Groq API Key
