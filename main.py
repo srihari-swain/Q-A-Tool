@@ -497,7 +497,7 @@ else:
 
 def main():
    
-    logo_path = "/home/srihari/Humanli.ai/test/Q-A-Tool/logo.png"  
+    logo_path = "Q-A-Tool/logo.png"  
     
     add_dynamic_network_bg(logo_path)
     
