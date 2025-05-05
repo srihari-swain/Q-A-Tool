@@ -4,7 +4,6 @@ import requests
 
 from bs4 import BeautifulSoup
 
-
 def scrape_url( url):
     """Scrape content from a URL."""
     try:
@@ -16,13 +15,10 @@ def scrape_url( url):
         
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # Remove script, style elements and navigation/header/footer if possible
         for script in soup(["script", "style", "nav", "header", "footer"]):
             script.decompose()
         
-        # Get text and clean it
         text = soup.get_text()
-        # Remove excessive newlines and whitespace
         text = re.sub(r'\n+', '\n', text)
         text = re.sub(r'\s+', ' ', text)
         

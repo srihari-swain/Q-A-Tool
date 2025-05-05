@@ -5,7 +5,6 @@ langchain-core
 langchain_huggingface
 faiss-cpu
 beautifulsoup4
-# playwright
 requests
 langchain-groq
 streamlit

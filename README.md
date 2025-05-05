@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 ### 5. Configure Groq API Key
 
-Create a `.env` file in the project root directory:
+Create a `.streamlit/secrets.toml` file in the project root directory:
 
 ```
 GROQ_API_KEY=your_groq_api_key_here
