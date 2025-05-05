@@ -1,11 +1,8 @@
 import os
-os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
-
-
-import streamlit as st
 import base64
+import streamlit as st
+
 from pathlib import Path
-import os
 from vectorstore import IngestUrls
 from retriver import Retriever
 
@@ -489,7 +486,6 @@ else:
     if st.button("Get Answer", disabled=not question):
         with st.spinner("Generating answer..."):
             try:
-                
                 answer = st.session_state.retriever.answer_question(question)
                 st.subheader("Answer")
                 st.write(answer)

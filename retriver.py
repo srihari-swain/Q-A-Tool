@@ -1,12 +1,9 @@
 import os
 import re
-from dotenv import load_dotenv
 
 from langchain_groq import ChatGroq
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-
-load_dotenv()
 
 class Retriever:
     def __init__(self, vector_store, sources, api_key , provider="groq", model_name=None):
