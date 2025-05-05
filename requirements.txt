@@ -5,7 +5,8 @@ langchain-core
 langchain_huggingface
 faiss-cpu
 beautifulsoup4
-playwright
+# playwright
+requests
 langchain-groq
 streamlit
 python-dotenv
