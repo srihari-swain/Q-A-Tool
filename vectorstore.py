@@ -1,10 +1,10 @@
 import logging
-from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from scrapper import scrape_url
 
-# Configure logging
+from scrapper import scrape_url
+from langchain_community.vectorstores import FAISS
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -13,7 +13,7 @@ class IngestUrls:
         self.sources = {}
         self.vector_store = None
         try:
-            self.embeddings = HuggingFaceBgeEmbeddings(model_name='all-MiniLM-L6-v2')
+            self.embeddings = HuggingFaceEmbeddings(model_name='all-MiniLM-L6-v2')
         except Exception as e:
             logger.error(f"Failed to initialize embeddings: {e}")
             raise

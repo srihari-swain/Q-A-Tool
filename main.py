@@ -1,3 +1,6 @@
+import os
+os.environ["STREAMLIT_WATCHER_TYPE"] = "none"
+
 
 import streamlit as st
 import base64
@@ -470,6 +473,7 @@ if st.button("Ingest URLs", disabled=not urls):
             st.session_state.sources = sources
             st.session_state.urls_ingested = True
             st.success("Ingestion complete!")
+            st.session_state.retriever = Retriever(st.session_state.vector_store, st.session_state.sources)
         except Exception as e:
             st.error(f"Error during ingestion: {e}")
 
@@ -484,8 +488,8 @@ else:
     if st.button("Get Answer", disabled=not question):
         with st.spinner("Generating answer..."):
             try:
-                retriever = Retriever(st.session_state.vector_store, st.session_state.sources)
-                answer = retriever.answer_question(question)
+                
+                answer = st.session_state.retriever.answer_question(question)
                 st.subheader("Answer")
                 st.write(answer)
             except Exception as e:
@@ -493,7 +497,7 @@ else:
 
 def main():
    
-    logo_path = "Q-A-Tool/logo.png"  
+    logo_path = "/home/srihari/Humanli.ai/test/Q-A-Tool/logo.png"  
     
     add_dynamic_network_bg(logo_path)
     

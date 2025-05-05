@@ -2,7 +2,7 @@ import os
 import re
 from dotenv import load_dotenv
 
-from langchain.chat_models import ChatOpenAI, ChatOllama, init_chat_model
+from langchain_groq import ChatGroq
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 
@@ -22,33 +22,25 @@ class Retriever:
         self.k = 4
 
         try:
-            if provider == "openai":
-                api_key = os.getenv("OPENAI_API_KEY")
-                if not api_key:
-                    raise ValueError("OPENAI_API_KEY not found in environment variables.")
-                model_name = model_name or "gpt-3.5-turbo"
-                self.llm = ChatOpenAI(model_name=model_name)
-            elif provider == "ollama":
-                model_name = model_name or "llama3"
-                try:
-                    self.llm = ChatOllama(model=model_name)
-                except Exception as e:
-                    raise RuntimeError(f"Ollama initialization failed: {e}")
-            elif provider == "groq":
-                api_key = os.getenv("GROQ_API_KEY")
-                if not api_key:
-                    raise ValueError("GROQ_API_KEY not found in environment variables.")
-                model_name = model_name or "llama3-8b-8192"
-                try:
-                    self.llm = init_chat_model(model_name, model_provider="groq")
-                except Exception as e:
-                    raise RuntimeError(f"Groq model initialization failed: {e}")
-            else:
-                raise ValueError(f"Unknown provider: {provider}")
+            api_key = os.getenv("GROQ_API_KEY")
+            if not api_key:
+                raise ValueError("GROQ_API_KEY not found in environment variables.")
+
+            model_name = model_name or "llama3-8b-8192"
+            try:
+                self.llm = ChatGroq(model=model_name, api_key=api_key)
+            except Exception as e:
+                raise RuntimeError(f"Groq model initialization failed: {e}")
+            
         except Exception as e:
             raise RuntimeError(f"Failed to initialize LLM: {e}")
 
         self.prompt_template = """
+        "Hello! I am your helpful assistant.\n\n"
+        "Hi there! I'm here to assist you with your question.\n"
+        "Greetings! Let's find the information you're looking for.\n"
+        "Welcome! I'm ready to help based on the content provided.\n\n"
+
         You are a helpful assistant that answers questions strictly based on the retrieved content.
 
         Retrieved content:
@@ -108,5 +100,3 @@ class Retriever:
             return answer
         except Exception as e:
             return f"Error during question answering: {e}"
-
-
