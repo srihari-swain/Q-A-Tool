@@ -10,5 +10,3 @@ langchain-groq
 streamlit
 python-dotenv
 
-# # Compatibility
-# pydantic <2 # Critical for LangChain compatibility

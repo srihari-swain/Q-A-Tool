@@ -9,7 +9,7 @@ from langchain.prompts import PromptTemplate
 load_dotenv()
 
 class Retriever:
-    def __init__(self, vector_store, sources, provider="groq", model_name=None):
+    def __init__(self, vector_store, sources, api_key , provider="groq", model_name=None):
         """
         Args:
             vector_store: Your vector DB or FAISS/Chroma instance.
@@ -22,7 +22,7 @@ class Retriever:
         self.k = 4
 
         try:
-            api_key = os.getenv("GROQ_API_KEY")
+            api_key = api_key
             if not api_key:
                 raise ValueError("GROQ_API_KEY not found in environment variables.")
 
